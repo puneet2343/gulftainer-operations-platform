@@ -1,0 +1,14 @@
+body{margin:0;background:#fff;font-family:Figtree,"Segoe UI",Arial,sans-serif;color:#0F1729}
+.canvas{width:1540px;padding:22px 26px;box-sizing:border-box}
+h1{font-size:30px;font-weight:600;margin:0 0 4px;letter-spacing:-0.02em}
+.sub{font-size:16px;color:#5B6576;margin:0 0 16px;line-height:1.35}
+.tier{border:1px solid #DDE2E7;border-radius:14px;padding:12px 14px;background:#F4F6F8;margin-bottom:12px}
+.tier h2{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#8A93A3;margin:0 0 10px}
+.boxes{display:flex;flex-wrap:wrap;gap:10px}
+.box{background:#fff;border:1px solid #DDE2E7;border-radius:10px;padding:10px 12px;flex:1 1 220px;font-size:15.5px;line-height:1.3}
+.box b{display:block;font-weight:600;font-size:16.5px;color:#283F8F;margin-bottom:2px}
+.box.ink b{color:#0F1729}
+.arrowrow{display:flex;justify-content:center;gap:140px;color:#5B6576;font-size:15px;margin:-4px 0 8px}
+.arrow{display:flex;align-items:center;gap:8px}
+.arrow:before{content:"";display:block;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:11px solid #283F8F}
+.note{font-size:14px;color:#5B6576;margin-top:8px}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Production architecture, part 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="base.css"></head>
+<body><div class="canvas">
+<h1>Production architecture on AWS (1 of 2): clients, edge and application</h1>
+<p class="sub">Static front end on CloudFront, HTTP APIs on Lambda behind API Gateway, identity federated from Gulftainer's Microsoft Entra ID through Cognito.</p>
+<div class="tier"><h2>Clients</h2><div class="boxes">
+  <div class="box"><b>Operations web app</b>Next.js 16 and React 19. Terminal, logistics, finance and control modules.</div>
+  <div class="box"><b>Customer e-services</b>Vessel schedule, container enquiry, e-token portal, online payment.</div>
+  <div class="box"><b>Gate and yard devices</b>Progressive web app on Intune-managed tablets with an offline queue.</div>
+  <div class="box"><b>External systems</b>Shipping-line EDI, Sharjah Customs, carrier tracking, SAP S/4HANA.</div>
+</div></div>
+<div class="arrowrow"><span class="arrow">HTTPS, TLS 1.2 or later</span><span class="arrow">WAF rules and rate limits</span></div>
+<div class="tier"><h2>Edge and identity</h2><div class="boxes">
+  <div class="box"><b>Amazon CloudFront</b>Static assets and pages, caching, origin shield, UAE edge locations.</div>
+  <div class="box"><b>AWS WAF and Shield</b>OWASP managed rules, bot control, geographic rules, DDoS protection.</div>
+  <div class="box"><b>Amazon Cognito</b>OIDC federation to Entra ID: single sign-on, MFA and Conditional Access enforced by Gulftainer IT.</div>
+  <div class="box"><b>Amazon API Gateway</b>HTTP API with JWT authoriser, per-client throttling, usage plans for partners.</div>
+</div></div>
+<div class="arrowrow"><span class="arrow">Signed requests with idempotency keys</span></div>
+<div class="tier"><h2>Application: AWS Lambda, Node.js 22, TypeScript</h2><div class="boxes">
+  <div class="box"><b>Terminal service</b>Vessel calls, containers, holds, customs, delivery orders, yard moves.</div>
+  <div class="box"><b>Gate service</b>E-tokens, marshalling yard, gate-in and gate-out, EIR.</div>
+  <div class="box"><b>Logistics service</b>Inland transfers, transport jobs, proof of delivery.</div>
+  <div class="box"><b>Warehouse service</b>Orders, stock ledger, approvals, reversals.</div>
+  <div class="box"><b>Finance service</b>Tariff, charges, invoices, payments, SAP postings.</div>
+  <div class="box"><b>Integration workers</b>EDI parsing, customs and carrier events, de-duplication.</div>
+  <div class="box"><b>Scheduled jobs</b>Token expiry, uncollected sweep, overdue invoices, reefer alerts.</div>
+  <div class="box ink"><b>Shared layer</b>Authorisation context, audit, outbox publisher, tracing.</div>
+</div><div class="note">Each service is a group of Lambda functions behind its own routes. The business rules are the same TypeScript modules as the prototype's service layer, so validated behaviour carries over unchanged.</div></div>
+</div></body></html>

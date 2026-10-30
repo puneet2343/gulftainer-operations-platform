@@ -1,0 +1,49 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>System context</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="base.css">
+<style>
+  .wrap{display:grid;grid-template-columns:330px 1fr 330px;gap:22px;align-items:center}
+  .col{display:flex;flex-direction:column;gap:10px}
+  .actor{border:1px solid #DDE2E7;border-radius:12px;padding:10px 12px;font-size:14.5px;background:#fff;line-height:1.3}
+  .actor b{display:block;font-weight:600;font-size:16px}
+  .core{border:2px solid #283F8F;border-radius:18px;padding:16px 18px;background:#F4F6F8}
+  .core h2{margin:0 0 4px;font-size:22px;font-weight:600;color:#283F8F}
+  .core p{margin:0 0 10px;font-size:14.5px;color:#5B6576}
+  .mods{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  .mod{background:#fff;border:1px solid #DDE2E7;border-radius:10px;padding:9px 11px;font-size:14.5px;line-height:1.3}
+  .mod b{display:block;font-weight:600;color:#0F1729;font-size:15.5px}
+  .ext{border:1px dashed #8A93A3;border-radius:12px;padding:10px 12px;font-size:14.5px;background:#fff;line-height:1.3}
+  .ext b{display:block;font-weight:600;font-size:16px}
+  .cap{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#8A93A3;margin:0 0 2px}
+</style></head>
+<body><div class="canvas">
+<h1>System context</h1>
+<p class="sub">Who uses the platform, what it does, and which external systems it exchanges data with.</p>
+<div class="wrap">
+  <div class="col"><p class="cap">Gulftainer and Momentum staff</p>
+    <div class="actor"><b>Terminal operations</b>Duty superintendents, ship and yard planners</div>
+    <div class="actor"><b>Gate officers</b>Marshalling yard and gate, on tablets that work offline</div>
+    <div class="actor"><b>Customer service</b>Documentation desk: customs, delivery orders, holds, collections</div>
+    <div class="actor"><b>Momentum warehouse and transport</b>Workers, supervisors, inventory and transport managers</div>
+    <div class="actor"><b>Finance, audit and IT</b>Finance managers, internal audit, system administration</div>
+  </div>
+  <div class="core"><h2>Gulftainer Operations platform</h2><p>One operational record for containers, vessels, gate, inland logistics, warehousing and billing across the UAE, Iraq, Saudi Arabia and the United States.</p>
+    <div class="mods">
+      <div class="mod"><b>Terminal</b>Vessel calls, containers, holds, customs, delivery orders, yard</div>
+      <div class="mod"><b>Gate and e-tokens</b>Appointments, marshalling yard, EIR, offline queue</div>
+      <div class="mod"><b>Inland logistics</b>Transfers to SICD and Sajaa, transport jobs, proof of delivery</div>
+      <div class="mod"><b>Warehousing</b>Orders, stock ledger, approvals, SKUs</div>
+      <div class="mod"><b>Finance</b>Tariff, charges, invoices, online payment</div>
+      <div class="mod"><b>Control</b>Notifications, reports, audit, sync, integrations</div>
+    </div>
+  </div>
+  <div class="col"><p class="cap">Customers and external systems</p>
+    <div class="actor"><b>Consignees and clearing agents</b>Container enquiry, haulier assignment, online payment</div>
+    <div class="actor"><b>Hauliers</b>E-token generation and slot management</div>
+    <div class="ext"><b>Shipping lines (EDI)</b>BAPLIE, COPRAR, CODECO, arrival notices</div>
+    <div class="ext"><b>Sharjah Customs</b>Clearance and inspection messages</div>
+    <div class="ext"><b>SAP S/4HANA</b>Invoice and payment postings, master data</div>
+    <div class="ext"><b>Payment gateway, SES and SMS</b>Card authorisation, customer notifications</div>
+  </div>
+</div>
+</div></body></html>

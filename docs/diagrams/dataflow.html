@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Data model and flows</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="base.css">
+<style>
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .store{border:1px solid #DDE2E7;border-radius:14px;padding:12px 14px;background:#fff}
+  .store h2{font-size:17px;font-weight:600;color:#283F8F;margin:0 0 2px}
+  .store p{font-size:13.5px;color:#5B6576;margin:0 0 8px}
+  .store ul{margin:0;padding:0;list-style:none;font-size:14.5px;line-height:1.45}
+  .store li:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#283F8F;margin-right:7px;vertical-align:2px}
+  .flow{margin-top:14px;border:1px solid #DDE2E7;border-radius:14px;background:#F4F6F8;padding:12px 14px}
+  .flow h2{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#8A93A3;margin:0 0 10px}
+  .chain{display:flex;align-items:stretch;gap:10px;font-size:14px;margin-bottom:8px}
+  .chain .n{background:#fff;border:1px solid #DDE2E7;border-radius:10px;padding:8px 10px;flex:1;line-height:1.3}
+  .chain .n b{display:block;font-weight:600;color:#0F1729}
+  .chain .a{color:#283F8F;font-weight:600;align-self:center;font-size:20px}
+</style></head>
+<body><div class="canvas">
+<h1>Where each kind of data lives</h1>
+<p class="sub">Polyglot persistence by access pattern: the relational system of record keeps transactional truth, DynamoDB serves high-rate keys, S3 holds files, MongoDB holds append-only histories and feeds that are read far more often than written.</p>
+<div class="grid">
+  <div class="store"><h2>Aurora PostgreSQL</h2><p>Transactional system of record, strict constraints, row-level locking</p><ul><li>Organisations, locations, users and roles</li><li>Parties, vessel calls, containers, holds, delivery orders</li><li>Stock ledger (append-only) and derived balances</li><li>Warehouse orders, transport jobs, inland transfers</li><li>Tariff, charges, invoices, payments</li><li>Audit log, hash-chained</li><li>Transactional outbox</li></ul></div>
+  <div class="store"><h2>DynamoDB</h2><p>Millisecond keys at terminal gate rates, TTL for expiry</p><ul><li>Idempotency keys: request id to result, 24-hour TTL</li><li>E-token slot capacity per terminal and hour</li><li>Gate device sessions and offline acknowledgements</li><li>Rate-limit and throttle counters</li><li>Live yard position index</li><li>Vessel schedule snapshot for the public site</li></ul></div>
+  <div class="store"><h2>Amazon S3</h2><p>Encrypted, versioned objects; Object Lock for legal documents</p><ul><li>Delivery orders, bills of lading, customs declarations</li><li>Equipment interchange receipts and gate photographs</li><li>DG declarations, VGM certificates, inspection reports</li><li>Proofs of delivery</li><li>EDI archive: BAPLIE, COPRAR, CODECO</li><li>Report exports and nightly extracts</li></ul></div>
+  <div class="store"><h2>MongoDB Atlas</h2><p>Flexible documents for histories and feeds, time-series collections</p><ul><li>Container event history, one document per container</li><li>Notification feed per role and user</li><li>Integration message log with de-duplication index</li><li>Reefer temperature readings</li><li>Report snapshots and dashboard aggregates</li><li>Portal activity and search material</li></ul></div>
+</div>
+<div class="flow">
+  <h2>A gate-out request, end to end</h2>
+  <div class="chain"><div class="n"><b>1. Gate tablet</b>POST /gate/out with idempotency key, token id, seal check and EIR remarks</div><span class="a">→</span><div class="n"><b>2. API Gateway and Cognito</b>JWT validated; role gate officer; location scope checked</div><span class="a">→</span><div class="n"><b>3. Lambda gate service</b>DynamoDB conditional put on the key; a repeat returns the stored result</div><span class="a">→</span><div class="n"><b>4. PostgreSQL transaction</b>Re-check release conditions; write gate transaction, container state, storage top-up, audit, outbox</div><span class="a">→</span><div class="n"><b>5. Outbox publisher</b>EventBridge event; SQS consumers update MongoDB history, notify the consignee, post to SAP</div></div>
+  <div class="chain"><div class="n"><b>Failure isolation</b>If step 4 fails nothing is written and the device shows the rule that blocked release. If step 5 fails the business transaction stands; the event retries with backoff and lands in a dead-letter queue for reconciliation.</div></div>
+</div>
+</div></body></html>

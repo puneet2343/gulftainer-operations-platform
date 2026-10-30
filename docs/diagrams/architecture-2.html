@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Production architecture, part 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="base.css"></head>
+<body><div class="canvas">
+<h1>Production architecture on AWS (2 of 2): data, messaging and operations</h1>
+<p class="sub">PostgreSQL is the system of record; DynamoDB serves high-rate operational keys; S3 holds documents; MongoDB holds histories and feeds. Events leave the database through a transactional outbox.</p>
+<div class="tier"><h2>Data and messaging</h2><div class="boxes">
+  <div class="box"><b>Amazon Aurora PostgreSQL</b>System of record: containers, vessel calls, stock ledger, invoices, audit. Multi-AZ, point-in-time recovery, read replica for reporting.</div>
+  <div class="box"><b>Amazon DynamoDB</b>E-token slot counters, gate device sessions, idempotency keys, offline queue acknowledgements, throttle counters.</div>
+  <div class="box"><b>Amazon S3</b>Delivery orders, EIRs, DG declarations, proofs of delivery. SSE-KMS encryption, versioning, Object Lock for legal records.</div>
+  <div class="box"><b>MongoDB Atlas on AWS (me-central-1)</b>Container event history, notification feed, integration message archive, reefer time series, report snapshots.</div>
+  <div class="box"><b>Amazon EventBridge and SQS</b>Domain events from the outbox, retries with exponential backoff, dead-letter queues for reconciliation.</div>
+  <div class="box"><b>Amazon ElastiCache for Redis</b>Vessel schedule and tariff cache, portal session throttles.</div>
+  <div class="box"><b>Amazon SES and SNS</b>Email and SMS to consignees and hauliers: container ready, token confirmation, invoice issued.</div>
+</div></div>
+<div class="tier"><h2>Operations, security and continuity</h2><div class="boxes">
+  <div class="box"><b>Observability</b>CloudWatch metrics and logs, X-Ray tracing, OpenTelemetry export to Grafana; Zabbix for on-site gate hardware.</div>
+  <div class="box"><b>Secrets and keys</b>Secrets Manager, KMS customer-managed keys, IAM least privilege, no long-lived credentials.</div>
+  <div class="box"><b>Resilience</b>Multi-AZ everywhere, automated backups, cross-region read replica, quarterly restore drills. RTO 60 minutes, RPO 5 minutes.</div>
+  <div class="box"><b>Delivery</b>GitHub Actions, AWS CDK infrastructure as code, development, test, staging and production accounts, canary releases with automatic rollback.</div>
+  <div class="box"><b>Compliance</b>ISO 27001 control mapping, immutable audit log, data residency in the UAE region, retention and deletion policies per document type.</div>
+</div></div>
+</div></body></html>
