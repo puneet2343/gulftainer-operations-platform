@@ -2,6 +2,8 @@
 
 A working prototype of a cargo operations platform for Gulftainer, built by SSI Maya. It covers GT Ports (container terminals), GT Logistics (inland depots, Momentum warehousing and transport) and the customer e-services portal, on the SSI Events design language.
 
+Live prototype: https://gulftainer-operations-platform.vercel.app/ (login `operations` / `gulftainer2026`).
+
 It runs entirely in the browser: the operations database is persisted to `localStorage` and seeded with a realistic data set on first use. No backend is required.
 
 ```bash
