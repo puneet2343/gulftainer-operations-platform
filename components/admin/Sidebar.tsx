@@ -231,7 +231,7 @@ export default function Sidebar({ mobile = false, onNavigate }: SidebarProps) {
 
             {/* The public site, kept open beside the admin panel */}
             <a
-              href="/"
+              href="/e-services"
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleNavigation}

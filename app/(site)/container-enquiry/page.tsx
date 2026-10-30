@@ -51,7 +51,7 @@ export default function ContainerEnquiryPage() {
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 pb-16 pt-8 md:px-8 md:pt-14">
-      <Link href="/" className="text-[13px] font-medium text-primary underline-offset-4 hover:underline">Home</Link>
+      <Link href="/e-services" className="text-[13px] font-medium text-primary underline-offset-4 hover:underline">Home</Link>
       <h1 className="mt-4 text-[32px] font-semibold leading-tight tracking-[-0.01em] text-secondary md:text-[44px]">Container enquiry</h1>
       <p className="mt-4 max-w-[62ch] text-[16px] leading-[1.6] text-gray-600 md:text-[18px]">Status updates for full import containers and the approximate storage charges calculated from discharge as per the terminal tariff. Non-DG containers have {db?.tariff.freeDays.nonDg ?? 10} days storage free; DG containers {db?.tariff.freeDays.dg ?? 1} day.</p>
 

@@ -20,7 +20,7 @@ export default function VesselSchedulePage() {
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 pb-16 pt-8 md:px-8 md:pt-14">
-      <Link href="/" className="text-[13px] font-medium text-primary underline-offset-4 hover:underline">Home</Link>
+      <Link href="/e-services" className="text-[13px] font-medium text-primary underline-offset-4 hover:underline">Home</Link>
       <h1 className="mt-4 text-[32px] font-semibold leading-tight tracking-[-0.01em] text-secondary md:text-[44px]">Vessel schedule</h1>
       <p className="mt-4 max-w-[62ch] text-[16px] leading-[1.6] text-gray-600 md:text-[18px]">Expected berthing times and export gate windows. The gate opens four days before the ETB and closes one day before; export containers are received only inside the window. Information is received from the carriers and presented in good faith; it is subject to change.</p>
 

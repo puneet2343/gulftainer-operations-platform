@@ -19,7 +19,7 @@ Open `/admin/login`. The prototype has one account, prefilled on the login scree
 | --- | --- |
 | `operations` | `gulftainer2026` |
 
-The account is a system administrator with every module. The other employees in the data (terminal operations, planners, gate officers, customer service, warehouse staff, finance, auditor) appear on tasks, events, approvals and the audit log. The public site at `/` is the customer e-services portal; the e-token portal lets you act as any registered consignee or haulier.
+The account is a system administrator with every module. The other employees in the data (terminal operations, planners, gate officers, customer service, warehouse staff, finance, auditor) appear on tasks, events, approvals and the audit log. The landing page `/` opens the operations platform login. The customer e-services portal is at `/e-services`; the e-token portal lets you act as any registered consignee or haulier.
 
 ## Modules
 
@@ -42,7 +42,7 @@ The account is a system administrator with every module. The other employees in 
 | `/admin/audit` | Append-only audit log and container trace |
 | `/admin/sync` | Offline queue replay, event outbox, inbound integration messages with a simulator |
 | `/admin/network`, `/admin/auth` | Entities, locations, settings, users and the permission matrix |
-| `/`, `/vessel-schedule`, `/container-enquiry`, `/e-token` | Customer e-services |
+| `/e-services`, `/vessel-schedule`, `/container-enquiry`, `/e-token` | Customer e-services |
 
 ## Where things live
 
@@ -75,8 +75,8 @@ app/admin/        modules; app/(site)/ customer portal
 
 ## Documentation
 
-- `docs/Gulftainer-Operations-Platform-User-Guide.docx` — how to use every screen, with images.
-- `docs/Gulftainer-Operations-Platform-Project-Documentation.docx` — research, requirements, prototype design and the proposed production architecture on AWS.
+- `docs/Gulftainer-Operations-Platform-User-Guide.pdf` — how to use every screen, with images.
+- `docs/Gulftainer-Operations-Platform-Project-Documentation.pdf` — research, requirements, prototype design and the proposed production architecture on AWS.
 - `docs/diagrams/` — source pages for the architecture diagrams used in the documentation.
 
 Built by Puneet Shukla, SSI Maya. Source: https://github.com/puneet2343/gulftainer-operations-platform

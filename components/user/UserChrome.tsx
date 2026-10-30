@@ -14,11 +14,11 @@ import { AppFeedbackDialog } from '@/components/user/AppFeedback';
  */
 
 /** Pages that have no back arrow. */
-const ROOT_PAGES = ['/', '/vessel-schedule', '/container-enquiry', '/e-token'];
+const ROOT_PAGES = ['/e-services', '/vessel-schedule', '/container-enquiry', '/e-token'];
 
 /** Top-level tabs: desktop pills and the phone bottom bar share this list. */
 export const PUBLIC_TABS = [
-  { href: '/', label: 'Home', match: (path: string) => path === '/' },
+  { href: '/e-services', label: 'Home', match: (path: string) => path === '/e-services' },
   { href: '/vessel-schedule', label: 'Vessel schedule', match: (path: string) => path.startsWith('/vessel-schedule') },
   { href: '/container-enquiry', label: 'Container enquiry', match: (path: string) => path.startsWith('/container-enquiry') },
   { href: '/e-token', label: 'E-token portal', match: (path: string) => path.startsWith('/e-token') },
@@ -38,7 +38,7 @@ function useChrome() {
     showBack: !ROOT_PAGES.includes(pathname),
     goBack() {
       if (window.history.length > 1) router.back();
-      else router.push('/');
+      else router.push('/e-services');
     },
   };
 }
@@ -151,7 +151,7 @@ export function UserBottomNav() {
 
   return (
     <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 grid h-[var(--user-nav-h)] grid-cols-4 border-t border-gray-200 bg-white/92 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden">
-      <NavItem href="/" label="Home" active={PUBLIC_TABS[0].match(pathname)}>
+      <NavItem href="/e-services" label="Home" active={PUBLIC_TABS[0].match(pathname)}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 10.5 12 3l9 7.5M5 9.5V20h5v-6h4v6h5V9.5" />
       </NavItem>
       <NavItem href="/vessel-schedule" label="Vessels" active={PUBLIC_TABS[1].match(pathname)}>
@@ -170,7 +170,7 @@ export function UserBottomNav() {
 /** The logo followed by the product word, separated by a hairline. */
 function Brand({ compact = false }: { compact?: boolean }) {
   return (
-    <Link href="/" aria-label={`${BRAND.company} ${BRAND.siteSuffix}, home`} className="inline-flex min-w-0 items-center gap-2.5 rounded-lg transition-opacity hover:opacity-80">
+    <Link href="/e-services" aria-label={`${BRAND.company} ${BRAND.siteSuffix}, home`} className="inline-flex min-w-0 items-center gap-2.5 rounded-lg transition-opacity hover:opacity-80">
       <Image src={BRAND.logo} alt={BRAND.company} width={260} height={64} priority className={`w-auto shrink-0 ${compact ? 'h-7' : 'h-8'}`} />
       <span className={`w-px shrink-0 bg-gray-200 ${compact ? 'h-5' : 'h-6'}`} aria-hidden="true" />
       <span className={`font-medium tracking-[-0.012em] text-secondary ${compact ? 'text-[17px]' : 'text-[19px]'}`}>{BRAND.siteSuffix}</span>

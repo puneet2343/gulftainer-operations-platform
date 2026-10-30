@@ -34,7 +34,7 @@ export default function ETokenPage() {
     <AdminSessionContext.Provider value={session}>
       <ToastProvider>
         <main className="mx-auto w-full max-w-[1200px] px-4 pb-16 pt-8 md:px-8 md:pt-14">
-          <Link href="/" className="text-[13px] font-medium text-primary underline-offset-4 hover:underline">Home</Link>
+          <Link href="/e-services" className="text-[13px] font-medium text-primary underline-offset-4 hover:underline">Home</Link>
           <h1 className="mt-4 text-[32px] font-semibold leading-tight tracking-[-0.01em] text-secondary md:text-[44px]">E-token portal</h1>
           <p className="mt-4 max-w-[62ch] text-[16px] leading-[1.6] text-gray-600 md:text-[18px]">Consignees assign hauliers to released containers and settle charges online. Hauliers generate the e-token for a two-hour gate slot before the truck arrives at the marshalling yard. Import pick-up tokens cost AED {db?.tariff.etoken ?? 25} inclusive of VAT.</p>
           {!db ? <p className="mt-8 text-[14px] text-gray-400">Loading…</p> : !party ? <PartyPicker parties={db.parties.filter(p => ['consignee', 'haulier', 'clearing_agent'].includes(p.type) && p.active)} /> : party.type === 'haulier' ? <HaulierView party={party} db={db} /> : <ConsigneeView party={party} db={db} />}

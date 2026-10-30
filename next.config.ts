@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
-  // Next 16 writes AGENTS.md/CLAUDE.md on `next dev` unless this is off.
+  // Prevent Next 16 from writing agent rule files during development.
   agentRules: false,
   async rewrites() {
     const routes: { source: string; destination: string }[] = [];
